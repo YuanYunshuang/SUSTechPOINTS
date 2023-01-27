@@ -3,7 +3,8 @@ import os
 import json
 
 this_dir = os.path.dirname(os.path.abspath(__file__))
-root_dir = os.path.join(this_dir, "data")
+# root_dir = os.path.join(this_dir, "data")
+root_dir = "/media/hdd/yuan/koko/data/MAPATHON/"
 
 def get_all_scenes():
     all_scenes = get_scene_names()

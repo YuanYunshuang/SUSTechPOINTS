@@ -12,7 +12,7 @@ import sys
 import scene_reader
 
 
-
+root_dir = "/media/hdd/yuan/koko/data/MAPATHON/"
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(BASE_DIR)
 
@@ -62,7 +62,7 @@ class Root(object):
     #   # cl = cherrypy.request.headers['Content-Length']
     #   rawbody = cherrypy.request.body.readline().decode('UTF-8')
 
-    #   with open("./data/"+scene +"/label/"+frame+".json",'w') as f:
+    #   with open(root_dir+scene +"/label/"+frame+".json",'w') as f:
     #     f.write(rawbody)
       
     #   return "ok"
@@ -78,7 +78,7 @@ class Root(object):
         scene = d["scene"]
         frame = d["frame"]
         ann = d["annotation"]
-        with open("./data/"+scene +"/label/"+frame+".json",'w') as f:
+        with open(root_dir+scene +"/label/"+frame+".json",'w') as f:
           json.dump(ann, f, indent=2, sort_keys=True)
 
       return "ok"
@@ -180,11 +180,11 @@ class Root(object):
     #   os.system("rm ./temp/src.pcd ./temp/tgt.pcd ./temp/out.pcd ./temp/trans.json")
 
 
-    #   tgt_pcd_file = "./data/"+scene +"/lidar/"+ref_frame+".pcd"
-    #   tgt_json_file = "./data/"+scene +"/label/"+ref_frame+".json"
+    #   tgt_pcd_file = root_dir+scene +"/lidar/"+ref_frame+".pcd"
+    #   tgt_json_file = root_dir+scene +"/label/"+ref_frame+".json"
 
-    #   src_pcd_file = "./data/"+scene +"/lidar/"+adj_frame+".pcd"      
-    #   src_json_file = "./data/"+scene +"/label/"+adj_frame+".json"
+    #   src_pcd_file = root_dir+scene +"/lidar/"+adj_frame+".pcd"
+    #   src_json_file = root_dir+scene +"/label/"+adj_frame+".json"
 
     #   cmd = extract_object_exe +" "+ src_pcd_file + " " + src_json_file + " " + object_id + " " +"./temp/src.pcd"
     #   print(cmd)
@@ -224,7 +224,7 @@ class Root(object):
     @cherrypy.expose    
     @cherrypy.tools.json_out()
     def objs_of_scene(self, scene):
-      return self.get_all_objs(os.path.join("./data",scene))
+      return self.get_all_objs(os.path.join(root_dir, scene))
 
     def get_all_objs(self, path):
       label_folder = os.path.join(path, "label")
@@ -260,7 +260,7 @@ class Root(object):
                   "count": 1
                 }
 
-      return [x for x in  all_objs.values()]
+      return [x for x in all_objs.values()]
 
 if __name__ == '__main__':
     cherrypy.quickstart(Root(), '/', config="server.conf")

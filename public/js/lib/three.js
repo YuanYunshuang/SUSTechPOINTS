@@ -1266,7 +1266,7 @@
 					let url;
 
 					if (Array.isArray(image)) {
-						// process array of images e.g. CubeTexture
+						// process array of camera e.g. CubeTexture
 						url = [];
 
 						for (let i = 0, l = image.length; i < l; i++) {
@@ -1369,11 +1369,11 @@
 
 	function serializeImage(image) {
 		if (typeof HTMLImageElement !== 'undefined' && image instanceof HTMLImageElement || typeof HTMLCanvasElement !== 'undefined' && image instanceof HTMLCanvasElement || typeof ImageBitmap !== 'undefined' && image instanceof ImageBitmap) {
-			// default images
+			// default camera
 			return ImageUtils.getDataURL(image);
 		} else {
 			if (image.data) {
-				// images of DataTexture
+				// camera of DataTexture
 				return {
 					data: Array.prototype.slice.call(image.data),
 					width: image.width,
@@ -16733,7 +16733,7 @@
 			}
 
 			if (textureNeedsGenerateMipmaps(texture, supportsMips)) {
-				// We assume images for cube map have the same size.
+				// We assume camera for cube map have the same size.
 				generateMipmap(_gl.TEXTURE_CUBE_MAP, texture, image.width, image.height);
 			}
 
@@ -29862,7 +29862,7 @@
 					const url = image.url;
 
 					if (Array.isArray(url)) {
-						// load array of images e.g CubeTexture
+						// load array of camera e.g CubeTexture
 						images[image.uuid] = [];
 
 						for (let j = 0, jl = url.length; j < jl; j++) {
@@ -29924,7 +29924,7 @@
 					const url = image.url;
 
 					if (Array.isArray(url)) {
-						// load array of images e.g CubeTexture
+						// load array of camera e.g CubeTexture
 						images[image.uuid] = [];
 
 						for (let j = 0, jl = url.length; j < jl; j++) {
